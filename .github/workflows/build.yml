@@ -1,0 +1,48 @@
+name: Build PearDesk10
+
+on:
+  push:
+    branches: [ "*" ]
+
+jobs:
+  build-windows:
+    runs-on: windows-latest
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v4
+
+    - name: Setup Go
+      uses: actions/setup-go@v5
+      with:
+        go-version: "1.25.5"
+
+    - name: Build Windows
+      run: go build -o peardesk.exe ./cmd/peardesk
+
+    - name: Upload Windows
+      uses: actions/upload-artifact@v4
+      with:
+        name: PearDesk10-Windows
+        path: peardesk.exe
+
+  build-linux:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v4
+
+    - name: Setup Go
+      uses: actions/setup-go@v5
+      with:
+        go-version: "1.25.5"
+
+    - name: Build Linux
+      run: go build -o peardesk ./cmd/peardesk
+
+    - name: Upload Linux
+      uses: actions/upload-artifact@v4
+      with:
+        name: PearDesk10-Linux
+        path: peardesk
