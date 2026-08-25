@@ -20,7 +20,7 @@ jobs:
     - name: Build Windows
       run: go build -o peardesk.exe ./cmd/peardesk
 
-    - name: Upload Windows
+    - name: Upload Windows Artifact
       uses: actions/upload-artifact@v4
       with:
         name: PearDesk10-Windows
@@ -33,6 +33,19 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v4
 
+    - name: Install X11 dev packages for robotgo
+      run: |
+        sudo apt update
+        sudo apt install -y \
+          libx11-dev \
+          libxtst-dev \
+          libxext-dev \
+          libxfixes-dev \
+          libxi-dev \
+          libxrandr-dev \
+          libxinerama-dev \
+          libxcursor-dev
+
     - name: Setup Go
       uses: actions/setup-go@v5
       with:
@@ -41,7 +54,7 @@ jobs:
     - name: Build Linux
       run: go build -o peardesk ./cmd/peardesk
 
-    - name: Upload Linux
+    - name: Upload Linux Artifact
       uses: actions/upload-artifact@v4
       with:
         name: PearDesk10-Linux
