@@ -1,4 +1,4 @@
-//go:build !windows
+//go:build headless
 
 // Package video provides stubs for headless/server builds that lack FFmpeg/x264.
 package video
