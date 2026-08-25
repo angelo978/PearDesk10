@@ -1,4 +1,4 @@
-//go:build !windows
+//go:build !windows && !headless
 
 // Package video provides H264 encoding (screen→NAL) and decoding (NAL→image)
 // using FFmpeg's libavcodec via CGO.
