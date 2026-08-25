@@ -1,7 +1,5 @@
 //go:build !windows
 
-package video
-
 // Package video provides H264 encoding (screen→NAL) and decoding (NAL→image)
 // using FFmpeg's libavcodec via CGO.
 package video
