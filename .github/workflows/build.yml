@@ -33,10 +33,12 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v4
 
-    - name: Install X11 dev packages for robotgo
+    - name: Install Linux dependencies (X11, GLX, FFmpeg)
       run: |
         sudo apt update
         sudo apt install -y \
+          build-essential \
+          pkg-config \
           libx11-dev \
           libxtst-dev \
           libxext-dev \
@@ -44,7 +46,13 @@ jobs:
           libxi-dev \
           libxrandr-dev \
           libxinerama-dev \
-          libxcursor-dev
+          libxcursor-dev \
+          libgl1-mesa-dev \
+          mesa-common-dev \
+          libglu1-mesa-dev \
+          libavcodec-dev \
+          libavutil-dev \
+          libswscale-dev
 
     - name: Setup Go
       uses: actions/setup-go@v5
@@ -59,3 +67,29 @@ jobs:
       with:
         name: PearDesk10-Linux
         path: peardesk
+
+  build-macos:
+    runs-on: macos-latest
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v4
+
+    - name: Setup Go
+      uses: actions/setup-go@v5
+      with:
+        go-version: "1.25.5"
+
+    - name: Install macOS dependencies
+      run: |
+        brew update
+        brew install ffmpeg pkg-config
+
+    - name: Build macOS
+      run: go build -o peardesk-macos ./cmd/peardesk
+
+    - name: Upload macOS Artifact
+      uses: actions/upload-artifact@v4
+      with:
+        name: PearDesk10-macOS
+        path: peardesk-macos
