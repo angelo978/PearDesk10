@@ -28,19 +28,6 @@ Pensato per chi vuole un controllo remoto semplice, isolato e senza dipendenze c
 
     Nessuna dipendenza cloud
 
-❗ Cosa NON fa ancora (senza raccontare balle)
-
-    Non ha 6 onion endpoint separati
-
-    Non ha 6 connessioni Tor fisiche indipendenti
-
-    Non ha riconnessione automatica ogni 60 secondi
-
-    Non ha canali fisici separati (solo logici)
-
-    Non ha recovery automatico del circuito Tor
-
-    Non è multi‑utente o multi‑sessione
 
 Oggi PearDesk10 usa un’unica connessione Tor con multiplexing dei frame.
 🔐 Trasporto Tor
