@@ -2,6 +2,7 @@ package main
 
 import (
     _ "embed"
+    "fmt"
     "log"
 
     "fyne.io/fyne/v2"
@@ -10,6 +11,9 @@ import (
     "github.com/peardesk/peardesk/pkg/config"
     "github.com/peardesk/peardesk/pkg/ui"
     "github.com/peardesk/peardesk/pkg/id"
+
+    // ⭐ IMPORTA IL MODULO TOR
+    "github.com/peardesk/peardesk/pkg/tor"
 )
 
 //go:embed icon.png
@@ -26,6 +30,11 @@ func main() {
     // ⭐ CARICA ID FISSO SE ESISTE
     if savedID, err := id.Load(); err == nil {
         cfg.HostID = savedID
+    }
+
+    // ⭐ AVVIA TOR AUTOMATICAMENTE (scarica, installa, avvia)
+    if err := tor.EnsureTor(); err != nil {
+        fmt.Println("Errore avvio Tor:", err)
     }
 
     a := app.NewWithID("com.peardesk.app")
